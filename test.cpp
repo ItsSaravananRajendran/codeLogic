@@ -2,7 +2,6 @@
 #include <vector>
 #include <fstream>
 #include <string>
-#include "jsoncpp/json/json.h"
 #include <iostream>
 #define L 5
 
@@ -97,7 +96,7 @@ bool findFunc (vector<vector <int> > v , int level ,int type){
 		}
 	}
 
-	if (v.size()==1 && type==0){
+	if (v.size()==1 && type==0 && v[0].size() != 1 ){
 		a = filter(pos,v[0]);
 		if (check(a)){
 			path[level] = "filter + ";
@@ -269,21 +268,77 @@ bool findFunc (vector<vector <int> > v , int level ,int type){
 			return true;
 		}
 
+		vector<int> num{0};		
+		num[0] = head(v[0]);
+		if (check(num)){
+			path[level] = "head";
+			return true;
+		}
+		out[0] = num;
+		if (findFunc(out,level+1,1)){
+			path[level] = "head";
+			return true;
+		}
 
+		num[0] = tail(v[0]);
+		if (check(num)){
+			path[level] = "tail";
+			return true;
+		}
+		out[0] = num;
+		if (findFunc(out,level+1,1)){
+			path[level] = "tail";
+			return true;
+		}
+
+		num[0] = minimum(v[0]);
+		if (check(num)){
+			path[level] = "minimum";
+			return true;
+		}
+		out[0]=num;
+		if (findFunc(out,level+1,1)){
+			path[level] = "minimum";
+			return true;
+		}
+
+		num[0] = maximum(v[0]);
+		if (check(num)){
+			path[level] = "maximum";
+			return true;
+		}
+		out[0]=num;
+		if (findFunc(out,level+1,1)){
+			path[level] = "maximum";
+			return true;
+		}
+
+		num[0] = sum(v[0]);
+		if (check(num)){
+			path[level] = "sum";
+			return true;
+		}
+		out[0]=num;
+		if (findFunc(out,level+1,1)){
+			path[level] = "sum";
+			return true;
+		}		
 	}
+
+
 	return false;
 }
 
 int main(){
-	vector<int> v1{ -1,-2,-3,-4,-5 };
-	vector<int> v2{ 1,2,3,4,5 };
-	vector <int> o{-1,-4,-9,-16,-25};
+	vector<int> v1{1,3,3,4 };
+	vector<int> v2{ 1,2,3,4};
+	vector <int> o{32};
 	vector <vector <int>> in;
 	in.push_back(v1);
 	in.push_back(v2);
 	output = o;
 	findFunc(in,0,0);
-	for(int I=0;I<5;I++){
+	for(int I=0;I<L;I++){
 		cout<<path[I]<<"\n";
 	}
 }
