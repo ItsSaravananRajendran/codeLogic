@@ -1,0 +1,8 @@
+{
+   "Note" : "This is a cofiguration file",
+   "Config" : { 
+       "server-ip"     : "10.10.10.20",
+       "server-port"   : "5555",
+       "buffer-length" : 5000
+   }   
+}
