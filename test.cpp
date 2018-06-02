@@ -3,7 +3,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
-#define L 5
+#define  L 5 
 
 using namespace std;
 
@@ -51,6 +51,8 @@ bool findFunc (vector<vector <int> > v , int level ,int type){
 	}
 
 	if (v.size() == 2 && type == 0){
+        
+
 		a = zipwith(addTwo,v[0],v[1]);
 		if (check(a)){
 			path[level] = "zipwith + ";
@@ -94,10 +96,12 @@ bool findFunc (vector<vector <int> > v , int level ,int type){
 			path[level] = "zipwith / ";
 			return true;
 		}
+
 	}
 
 	if (v.size()==1 && type==0 && v[0].size() != 1 ){
-		a = filter(pos,v[0]);
+    
+        a = filter(pos,v[0]);
 		if (check(a)){
 			path[level] = "filter + ";
 			return true;
@@ -119,6 +123,7 @@ bool findFunc (vector<vector <int> > v , int level ,int type){
 			path[level] = "filter - ";
 			return true;
 		}
+
 
 
 		a = filter(odd,v[0]);
@@ -144,7 +149,18 @@ bool findFunc (vector<vector <int> > v , int level ,int type){
 			return true;
 		}
 
-
+        for(int K=0;K<v[0].size();K++){
+            a = take(v[0],K);
+            if(check(a)){
+                path[level] = "take";
+                return true;
+            }
+            out[0] =a ;
+            if (findFunc(out,level+1,0)){
+                path[level] = "take";
+                return true;
+            }
+        }
 
 		a = mapping(incr,v[0]);
 		if (check(a)){
@@ -325,17 +341,16 @@ bool findFunc (vector<vector <int> > v , int level ,int type){
 		}		
 	}
 
-
 	return false;
 }
 
 int main(){
-	vector<int> v1{1,3,3,4 };
-	vector<int> v2{ 1,2,3,4};
-	vector <int> o{32};
+	vector<int> v1{1,2,3,4,5 };
+	vector<int> v2{5,3,2,1,0};
+	vector <int> o{1,4,9,16,25};
 	vector <vector <int>> in;
 	in.push_back(v1);
-	in.push_back(v2);
+    //in.push_back(v2);
 	output = o;
 	findFunc(in,0,0);
 	for(int I=0;I<L;I++){

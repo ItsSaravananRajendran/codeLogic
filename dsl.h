@@ -250,3 +250,4 @@ function <vector <int> (function <int(int,int)> , vector<int>)> scanl = [](funct
 	}
 	return res;
 };
+

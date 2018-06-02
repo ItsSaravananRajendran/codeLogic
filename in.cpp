@@ -3,26 +3,7 @@
 #include <fstream>
 #include <vector>
 
-void 
-displayCfg(const Json::Value &cfg_root);
-
-int
-main()
-{
-    Json::Reader reader;
-    Json::Value cfg_root;
-    std::ifstream cfgfile("dot.json");
-    cfgfile >> cfg_root;
-
-    //std::cout << "______ cfg_root : start ______" << std::endl;
-    //std::cout << cfg_root << std::endl;
-    //std::cout << "______ cfg_root : end ________" << std::endl;
-
-    displayCfg(cfg_root);
-}       
-
-void 
-displayCfg(const Json::Value &cfg_root)
+void  displayCfg(const Json::Value &cfg_root)
 {
     //std::string serverIP = cfg_root["Config"]["server-ip"].asString();
     //std::string serverPort = cfg_root["Config"]["server-port"].asString();
@@ -38,7 +19,20 @@ displayCfg(const Json::Value &cfg_root)
     if (cfg_root[0]["input"][1].asString() == "null" ){
     	std::cout<<"True";
     }
-    std::array <int, 5> a =cfg_root[0]["input"][1].asArray(); 
-    std::cout<<a[0]<<std::endl;
 
 }
+
+int main()
+{
+    Json::Reader reader;
+    Json::Value cfg_root;
+    std::ifstream cfgfile("dot.json");
+    cfgfile >> cfg_root;
+
+    //std::cout << "______ cfg_root : start ______" << std::endl;
+    //std::cout << cfg_root << std::endl;
+    //std::cout << "______ cfg_root : end ________" << std::endl;
+
+    displayCfg(cfg_root);
+}       
+
